@@ -1,5 +1,3 @@
-import { JsonValue } from '@prisma/client/runtime/library';
-
 export type Description = {
   title: string;
   text: string[];
@@ -7,6 +5,7 @@ export type Description = {
 
 export type Product = {
   id: number;
+  slug: string;
   category: string;
   namespaceId: string;
   name: string;
@@ -17,7 +16,7 @@ export type Product = {
   colorsAvailable: string[];
   color: string;
   images: string[];
-  description: JsonValue[];
+  description: Description[];
   screen: string;
   resolution: string;
   processor: string;
@@ -26,3 +25,17 @@ export type Product = {
   zoom: string | null;
   cell: string[];
 };
+
+export type ProductCard = Pick<
+  Product,
+  | 'id'
+  | 'slug'
+  | 'category'
+  | 'name'
+  | 'priceRegular'
+  | 'priceDiscount'
+  | 'screen'
+  | 'capacity'
+  | 'color'
+  | 'ram'
+> & { image: string };

@@ -63,7 +63,36 @@ export const getAll: GetAll = async (
     take: perPage,
     where: filters,
     orderBy,
+    select: {
+      id: true,
+      category: true,
+      slug: true,
+      name: true,
+      priceRegular: true,
+      priceDiscount: true,
+      screen: true,
+      capacity: true,
+      color: true,
+      ram: true,
+      year: true,
+      images: true,
+    },
   });
 
-  return result;
+  const products = result.map(product => ({
+    id: product.id,
+    category: product.category,
+    slug: product.slug,
+    name: product.name,
+    priceRegular: product.priceRegular,
+    priceDiscount: product.priceDiscount,
+    screen: product.screen,
+    capacity: product.capacity,
+    color: product.color,
+    ram: product.ram,
+    year: product.year,
+    image: product.images[0],
+  }));
+
+  return products;
 };

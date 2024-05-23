@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { Category, ErrorMessages, Product } from '../types';
+import { Category, ErrorMessages, ProductCard } from '../types';
 
 type GetAll = (
   category: string,
@@ -10,7 +10,7 @@ type GetAll = (
     maxPrice?: number;
   },
   sortParams: { sortBy?: string },
-) => Promise<Product[]>;
+) => Promise<ProductCard[]>;
 
 const prisma = new PrismaClient();
 
@@ -74,7 +74,6 @@ export const getAll: GetAll = async (
       capacity: true,
       color: true,
       ram: true,
-      year: true,
       images: true,
     },
   });
@@ -90,7 +89,6 @@ export const getAll: GetAll = async (
     capacity: product.capacity,
     color: product.color,
     ram: product.ram,
-    year: product.year,
     image: product.images[0],
   }));
 
